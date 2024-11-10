@@ -1,0 +1,79 @@
+import unittest
+from math_quiz import function_A, function_B, function_C
+
+class TestMathQuizGame(unittest.TestCase):
+    """
+    Unit test class for testing math quiz game functions (function_A, function_B, function_C).
+    """
+
+    def test_function_A(self):
+        """
+        Test that function_A generates random numbers within the specified range.
+        
+        function_A(min_val, max_val) should return a random number between min_val and max_val (inclusive).
+        """
+        min_value = 1
+        max_value = 10
+        for _ in range(1000):  # Test with 1000 random values to ensure robustness
+            try:
+                random_number = function_A(min_value, max_value)
+                self.assertTrue(min_value <= random_number <= max_value, 
+                                f"Generated number {random_number} is out of range!")
+            except Exception as e:
+                self.fail(f"An error occurred while testing function_A: {e}")
+
+    def test_function_B(self):
+        """
+        Test that function_B behaves as expected. (Assumed to generate two numbers and return their sum.)
+        
+        You may need to adjust this test based on the actual functionality of function_B.
+        """
+        for _ in range(1000):  # Test 1000 random pairs
+            try:
+                num1, num2 = function_B()  # Assuming function_B returns two numbers
+                # Check if the numbers are integers
+                self.assertIsInstance(num1, int, "First number is not an integer")
+                self.assertIsInstance(num2, int, "Second number is not an integer")
+                # Check that their sum is as expected
+                expected_sum = num1 + num2
+                self.assertEqual(num1 + num2, expected_sum, f"Sum of {num1} and {num2} is incorrect!")
+            except Exception as e:
+                self.fail(f"An error occurred while testing function_B: {e}")
+
+    def test_function_C(self):
+        """
+        Test that function_C handles basic arithmetic operations correctly.
+        
+        Function_C should take two numbers and an operator, then return the correct result.
+        """
+        test_cases = [
+            (5, 2, '+', '5 + 2', 7),    # Example for addition
+            (10, 3, '-', '10 - 3', 7),  # Example for subtraction
+            (4, 6, '*', '4 * 6', 24),   # Example for multiplication
+            (20, 5, '/', '20 / 5', 4),  # Example for division
+            (10, 0, '/', '10 / 0', 'undefined')  # Example for division by zero
+        ]
+
+        for num1, num2, operator, expected_problem, expected_answer in test_cases:
+            try:
+                # Call function_C to get the result
+                result = function_C(num1, num2, operator)
+                
+                # Check that the result matches the expected answer
+                self.assertEqual(result, expected_answer, 
+                                 f"For problem '{expected_problem}', expected {expected_answer} but got {result}")
+                
+                # Optionally, check the problem string format if needed
+                formatted_problem = f"{num1} {operator} {num2}"
+                self.assertEqual(formatted_problem, expected_problem, 
+                                 f"Problem string format mismatch. Expected '{expected_problem}', got '{formatted_problem}'")
+                
+            except ZeroDivisionError:
+                # Special handling for division by zero
+                self.assertEqual(expected_answer, 'undefined', 
+                                 f"Division by zero should return 'undefined', but got {result}")
+            except Exception as e:
+                self.fail(f"An error occurred while testing function_C: {e}")
+
+if __name__ == "__main__":
+    unittest.main()
