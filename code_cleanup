@@ -2,16 +2,10 @@ import unittest
 from math_quiz import function_A, function_B, function_C
 
 class TestMathQuizGame(unittest.TestCase):
-    """
-    Unit test class for testing math quiz game functions (function_A, function_B, function_C).
-    """
+ 
 
     def test_function_A(self):
-        """
-        Test that function_A generates random numbers within the specified range.
-        
-        function_A(min_val, max_val) should return a random number between min_val and max_val (inclusive).
-        """
+      
         min_value = 1
         max_value = 10
         for _ in range(1000):  # Test with 1000 random values to ensure robustness
@@ -23,11 +17,7 @@ class TestMathQuizGame(unittest.TestCase):
                 self.fail(f"An error occurred while testing function_A: {e}")
 
     def test_function_B(self):
-        """
-        Test that function_B behaves as expected. (Assumed to generate two numbers and return their sum.)
-        
-        You may need to adjust this test based on the actual functionality of function_B.
-        """
+      
         for _ in range(1000):  # Test 1000 random pairs
             try:
                 num1, num2 = function_B()  # Assuming function_B returns two numbers
@@ -41,11 +31,7 @@ class TestMathQuizGame(unittest.TestCase):
                 self.fail(f"An error occurred while testing function_B: {e}")
 
     def test_function_C(self):
-        """
-        Test that function_C handles basic arithmetic operations correctly.
-        
-        Function_C should take two numbers and an operator, then return the correct result.
-        """
+       
         test_cases = [
             (5, 2, '+', '5 + 2', 7),    # Example for addition
             (10, 3, '-', '10 - 3', 7),  # Example for subtraction
